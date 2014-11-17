@@ -10,10 +10,14 @@
    *************************** */
 
 typedef struct {
+	struct node *sems;
+	int value;
 
 } tasem_t;
 
 typedef struct {
+	tasem_t lock;
+
 
 } talock_t;
 
