@@ -21,6 +21,7 @@
    ***************************** */
 ucontext_t mainctx; //global variable to keep track of ctx for main and a linked list of ctx's
 struct node* list;
+struct node *cond_list;
 
 
 void ta_libinit(void) {
@@ -157,17 +158,25 @@ void ta_unlock(talock_t *mutex) { //when finished your critical section sets to 
      stage 3 library functions
    ***************************** */
 
+//we ran out of time becasue we struggled a lot on parts 1 and 2. We got the basic ideas down but it was far to late to be able to implement this without it screwing up everything else. Sorry
+
 void ta_cond_init(tacond_t *cond) {
-	
+	//make room on the stack for condition nodes
 	
 }
 
 void ta_cond_destroy(tacond_t *cond) {
+	//free those condition nodes
 }
 
 void ta_wait(talock_t *mutex, tacond_t *cond) {
+	// add the ctx to the condition queue 
+	// have it yield
 }
 
 void ta_signal(tacond_t *cond) {
+	//take the top of the condition queue
+	//turn lock to 1
+	//the thread from the condition queue will take the lock
 }
 
