@@ -25,7 +25,7 @@ struct node* list;
 
 void ta_libinit(void) {
 	list=NULL;
-	getcontext(&mainctx);
+	//getcontext(&mainctx);
     return;
 }
 
@@ -42,27 +42,31 @@ void ta_create(void (*func)(void *), void *arg) {
 	
 	list_append(&ctx1, &list);
 
-	free(stack1);
+	//free(stack1);
     return;
 }
 
 void ta_yield(void) {
 
 	if (list== NULL) {
+		printf("list is null\n");
 		return;
 		}
 	
-	struct node *current = list;
+	struct node *front = list;
 	struct node *back = list;
-	while (back->next != NULL) {
-		back= back->next;
-		}
-	back->next=current;
-	list= current->next;
-	current->next = NULL; 
-	swapcontext(&current->ctx, &list ->ctx);
 	
-    return;
+	while (back->next!=NULL) {
+		back=back->next;
+		}
+	back->next=front;
+	list=list->next;
+	
+	front->next= NULL;
+	
+		swapcontext(&front->ctx, &list->ctx);
+		
+
 }
 
 int ta_waitall(void) {
@@ -70,12 +74,13 @@ int ta_waitall(void) {
 		return 0;
 		}
 	struct node *current_thread= list;
-	while (1) {
-		swapcontext(&mainctx, &current_thread->ctx);
+	while (1) {	
+		swapcontext(&mainctx, &(current_thread->ctx));
 		if (current_thread->next ==NULL) {
+			printf("all threads finished\n");
 			return 0;
 			}
-		current_thread= current_thread->next;
+		current_thread=current_thread->next;
 		
 		
 		}
