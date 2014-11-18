@@ -158,6 +158,8 @@ void ta_unlock(talock_t *mutex) { //when finished your critical section sets to 
    ***************************** */
 
 void ta_cond_init(tacond_t *cond) {
+	
+	
 }
 
 void ta_cond_destroy(tacond_t *cond) {

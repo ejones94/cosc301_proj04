@@ -22,6 +22,7 @@ typedef struct {
 } talock_t;
 
 typedef struct {
+	struct node *condition;
 
 } tacond_t;
 
